@@ -1,0 +1,186 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = null;
+}
+
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jaldi&display=swap" rel="stylesheet">
+
+
+
+<div class="bg-dark">
+    <nav class="navbar navbar-expand navbar-dark bg-dark row" style="font-size:0.7em">
+        <div class="collapse navbar-collapse">
+
+            <div class="col-md-2" style="text-align:center">
+                <a href="/Home/Index" class="nav-item active" style="color:white">Inicio</a>
+
+            </div>
+            <div class="col-md-2" style="text-align:center">
+
+                <a href="#" style="color:white">Asesores Contables</a>
+            </div>
+            <div class="col-md-4">
+
+            </div>
+            <div class="col-md-2">
+
+                <div class="dropdown">
+
+                    <a class="dropdown-toggle" data-toggle="dropdown" style="color:white;">Aula Virtual</a>
+
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/Usuario/Login" style="color:black;">Estudiante</a>
+                        <a class="dropdown-item" href="/Profesor/Login" style="color:black">Docente</a>
+                        <a class="dropdown-item" href="/Admin/Login" style="color:black;">Administrador</a>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-md-2">
+
+                <a href="#" style="color:white">Canales de Atención</a>
+            </div>
+
+        </div>
+    </nav>
+</div>
+<div style="background-color:black">
+    <nav class="navbar navbar-expand navbar-dark row" style="background-color: black;">
+        <div class="collapse navbar-collapse">
+
+            <div class="col-lg-2" style="text-align:center">
+                <a href="/Home/Index" class="nav-item active">
+                    <img src="~/images/logo blanco.png" alt="Logo ORACON" width="80px" height="65px" />
+                </a>
+
+            </div>
+            <div class="col-lg-6" style="text-align:center">
+
+                <div class="row">
+                    <div class="col-lg-3">
+                        <a href="#" style="color:white">NOSOTROS</a>
+
+                    </div>
+                    <div class="col-lg-3" style="text-align:center">
+                        <a href="#" style="color:white">SERVICIOS</a>
+                    </div>
+                    <div class="col-lg-3" style="text-align:center">
+                        <a href="#" style="color:white">NOTICIAS</a>
+                    </div>
+                    <div class="col-lg-3" style="text-align:center">
+
+                        <a href="#" style="color:white">CURSOS</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="row">
+                    <div class="col-lg-2">
+
+                    </div>
+                    <div class="col-lg-4">
+                        <a class="btn" href="#" style="color: white; background-color: #ff2f00;">CLIENTE VIP</a>
+                    </div>
+                    <div class="col-lg-6">
+                        <a class="btn" href="#" style="color: white; background-color: #ff2f00;">CONVIERTETE EN CLIENTE</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </nav>
+</div>
+
+
+
+<br />
+<h1 style="text-align:center;" class="display-4">Cursos en general (invitado)</h1>
+
+<br />
+<div class="container">
+    <div class="form-group">
+        <input type="text" class="form-control pull-right" style="width:20%" id="search" placeholder="Buscador...">
+    </div><br />
+
+    <table class="table" id="mytable">
+        <thead style="background-color: black; color:white; ">
+            <tr>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Profesor</th>
+                <th>Precio</th>
+                <th>Etiquetas</th>
+                <th>Video</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var x in ViewBag.Cursos)
+            {
+                <tr>
+                    <td>@x.nombre</td>
+                    <td>@x.descripcion</td>
+                    <td>@x.profesor.nombres @x.profesor.apellidos</td>
+                    <td>@x.precio</td>
+                    <td>
+                        @foreach (var i in @x.etiquetas)
+                        {
+                            @i.categoria.nombre <label> </label>
+                        }
+                    </td>
+                    <td>
+
+                        <iframe width="500" height="300" src="@x.videoPresentacion" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+
+
+
+
+
+    </table>
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#search").keyup(function () {
+            _this = this;
+            // Show only matching TR, hide rest of them
+            $.each($("#mytable tbody tr"), function () {
+                if ($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1)
+                    $(this).hide();
+                else
+                    $(this).show();
+            });
+        });
+    });
+</script>
+
+<style>
+    * {
+        font-family: 'Bebas Neue', cursive;
+    }
+</style>

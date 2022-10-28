@@ -1,0 +1,73 @@
+﻿
+@{ ViewData["Title"] = "Create";
+    Layout = null;
+}
+
+
+
+<!--agregando Bootstrap -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<!-- JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+
+
+
+
+@if (TempData["CreateUsuario"] != "")
+{
+    <div class="row alert alert-danger" style="margin:0;padding:0; text-align:center">
+        @TempData["CreateUsuario"]
+    </div>
+}
+
+
+
+<div class="row">
+    <div class="col-sm-6">
+        <img width="100%" height="102%" alt="imgLoginUsuario" src="~/images/DSC05647.jpg"/>
+    </div>
+    <div class="col-sm-6" style="align-content:center; align-items:center; text-align:center">
+        <div class="container"><br />
+            <img src="~/images/20.png" width="10%" height="10%" /><br />
+            <h2 class="display-5">Registrarme</h2>
+            <form action="/Usuario/Create" method="post">
+                
+                <div class="form-group">
+                    <label class="form-text">Nombres: </label>
+                    <input value="" placeholder="Ej. Juan Fernando" class="form-control" type="text" name="nombres" />
+                </div>
+                <div class="form-group">
+                    <label class="form-text">Apellidos: </label>
+                    <input value="" placeholder="Ej. Escalante Aliaga" class="form-control" type="text" name="apellidos" />
+                </div>
+                <div class="form-group">
+                    <label class="form-text">Fecha de nacimiento: </label>
+                    <input value="" class="form-control" type="date" name="fechaNac" />
+                </div>
+                <div class="form-group">
+                    <label class="form-text">Correo: </label>
+                    <input value="" placeholder="Ej. juan_escalante@gmail.com" class="form-control" type="email" name="correo" />
+                </div>
+                <div class="form-group">
+                    <label class="form-text">Usuario: </label>
+                    <input value="" placeholder="Ej. usuario123" class="form-control" type="text" name="usuario" />
+                </div>
+                <div class="form-group">
+                    <label class="form-text">Contraseña: </label>
+                    <input value="" class="form-control" type="password" name="passwd" />
+                </div>
+
+                <button class="btn" style="color: white; background-color: #ff2f00" type="submit">Crear</button>
+                <a href="/Usuario/Login" style="color:#ff2f00;">Regresar</a>
+            </form>
+
+        </div>
+        
+    </div>
+</div>
+
+

@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewData["Title"] = "Login";
+    Layout = null;
+}
+<!--agregando Bootstrap -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<!-- JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jaldi&display=swap" rel="stylesheet">
+
+
+@if (TempData["LoginProfesor"] != null)
+{
+    <div class="row alert alert-danger" style="margin:0;padding:0; text-align:center">
+        @TempData["LoginAdmin"]
+    </div>
+}
+
+<div class="row">
+
+    <div class="col-sm-6" style="align-content:center;
+align-items:center">
+        <img width="100%" height="105%" class="img" alt="imgLoginUsuario" src="~/images/_DSC8929.jpg" />
+    </div>
+    <div class="col-sm-6" style="align-content:center; align-items:center; text-align:center">
+        <br />
+        <img width="23%" height="23%" alt="icoLoginUsuario" style="border:5%" src="~/images/20.png" />
+        <h1 class="display-3">Iniciar sesión</h1>
+        <form action="/Admin/Login" method="post">
+            <br />
+            <div class="form-group">
+                <label class="form-text">Usuario: </label>
+                <input placeholder="Ej. usuario123" class="form-control" type="text" name="usuario" />
+
+            </div>
+            <div class="form-group">
+                <label class="form-text">Contraseña: </label>
+                <input class="form-control" type="password" name="passwd" />
+
+            </div>
+            <button class="btn" style="color:white; background-color:#ff2f00;" type="submit">Iniciar sesión</button>
+        </form>
+        <br />
+    </div>
+</div>
+
+<br />
+<br />
+<br />
+<br />
+<footer class="text-lg-start fixed-bottom bg-light text-muted" style="padding:20px;">
+    <div class="row">
+        <hr />
+        <div class="col-lg-5">
+            <a target="_blank" href="https://www.facebook.com/AsesoriaEmpresarialOracon">
+                <img src="~/images/18-184179_free-facebook-icon-png-vector-fb-icon-black.png" height="25px" width="15px" alt="logofb" />
+            </a>
+
+            &nbsp;
+            <a target="_blank" href="https://www.youtube.com/channel/UCg9BYxEe8ft9H7IOspIhccw">
+                <img src="~/images/640px-YouTube_dark_icon_(2017).svg.png" height="25px" width="40px" alt="youtube" />
+            </a>
+
+            <a target="_blank" href="https://pe.linkedin.com/in/jhener-tejada-cerdán-9a63bb173">
+                <img src="~/images/black-linkedin-icon.png" height="45px" width="45px" alt="linkedin" />
+            </a>
+
+        </div>
+        <div class="col-lg-2"></div>
+        <div class="col-lg-5 text-right">
+            Copyright © ORACON
+            <br />
+            Desarrollado por Miguel Fernando Aliaga Chacón
+        </div>
+    </div>
+</footer>
+
+<style>
+    * {
+        font-family: 'Bebas Neue', cursive;
+    }
+</style>

@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.30" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.30" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\js\megamenu\.sass-cache\65e4c30c131f260ea88c3e4f2e16dfc2ba547e74\_utilities.scssc" />
+    <None Include="wwwroot\js\megamenu\.sass-cache\af1a5722249b61fe97c5776f7a26e0902a00f406\_reset.scssc" />
+    <None Include="wwwroot\js\megamenu\.sass-cache\dcc061f230fc2fe0c21b7b61f847836d70e17527\ie.scssc" />
+    <None Include="wwwroot\js\megamenu\.sass-cache\dcc061f230fc2fe0c21b7b61f847836d70e17527\print.scssc" />
+    <None Include="wwwroot\js\megamenu\.sass-cache\dcc061f230fc2fe0c21b7b61f847836d70e17527\screen.scssc" />
+  </ItemGroup>
+
+</Project>

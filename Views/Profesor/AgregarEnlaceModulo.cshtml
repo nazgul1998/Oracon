@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewData["Title"] = "AgregarEnlaceModulo";
+}
+
+
+<nav class="navbar  fixed-top navbar-expand navbar-dark row" style="background-color: black; box-sizing: content-box;">
+    <div class="collapse navbar-collapse">
+
+        <div class="col-lg-2" style="text-align:center">
+            <a href="/Profesor/Index" class="nav-item active">
+                <img src="~/images/logo blanco.png" alt="Logo ORACON" width="80px" height="65px" />
+            </a>
+
+        </div>
+        <div class="col-lg-5" style="text-align:center">
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <a href="/Profesor/Index" style="color:white">CURSOS</a>
+
+                </div>
+                <div class="col-lg-3" style="text-align:center">
+
+                </div>
+                <div class="col-lg-3" style="text-align:center">
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-lg-5">
+            <div class="row ">
+                <div class="col-lg-7" style="color: white; align-items: center; align-content: center; text-align: center">
+                    <label style="padding:0.2em; margin:0.2em;">Bienvenido, @ViewBag.ProfesorLogeado.nombres</label>
+                </div>
+
+                <div class="col-lg-5">
+                    <form method="post" action="/Profesor/Logout">
+                        <button class="btn" type="submit" style="color: white; background-color: #ff2f00;">CERRAR SESÍON</button>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+</nav>
+
+<h1 style="text-align:center;" class="display-4">Agregar enlace externo </h1>
+<br />
+<div class="container">
+    <form action="/Profesor/AgregarEnlaceModulo" method="post">
+        <input hidden name="idModulo" value="@ViewBag.IdModulo" />
+        <label class="form-label">Titulo</label>
+        <input class="form-control" type="text" name="titulo" />
+        <br />
+        <label class="form-label">Descripcion</label>
+        <input class="form-control" type="text" name="descripcion" />
+        <br />
+        <label class="form-label">Enlace externo</label>
+        <input class="form-control" name="link" type="url" />
+        <br /><br />
+        <div style="align-content:center; align-items:center; text-align:center;">
+            <button class="btn" style="background-color:#ff2f00; color:white;" type="submit">Crear</button>
+            <a style="color:#ff2f00;" href="/Profesor/VerMaterialModulo?idModulo=@ViewBag.IdModulo">Cancelar</a>
+        </div>
+    </form>
+
+</div>

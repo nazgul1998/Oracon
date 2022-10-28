@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewData["Title"] = "VerCurso";
+}
+
+
+
+<nav class="navbar  fixed-top navbar-expand navbar-dark row" style="background-color: black; box-sizing: content-box;">
+    <div class="collapse navbar-collapse">
+
+        <div class="col-lg-2" style="text-align:center">
+            <a href="/Profesor/Index" class="nav-item active">
+                <img src="~/images/logo blanco.png" alt="Logo ORACON" width="80px" height="65px" />
+            </a>
+
+        </div>
+        <div class="col-lg-5" style="text-align:center">
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <a href="/Profesor/Index" style="color:white">CURSOS</a>
+
+                </div>
+                <div class="col-lg-3" style="text-align:center">
+
+                </div>
+                <div class="col-lg-3" style="text-align:center">
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-lg-5">
+            <div class="row ">
+                <div class="col-lg-7" style="color: white; align-items: center; align-content: center; text-align: center">
+                    <label style="padding:0.2em; margin:0.2em;">Bienvenido, @ViewBag.ProfesorLogeado.nombres</label>
+                </div>
+
+                <div class="col-lg-5">
+                    <form method="post" action="/Profesor/Logout">
+                        <button class="btn" type="submit" style="color: white; background-color: #ff2f00;">CERRAR SESÍON</button>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+</nav>
+
+@if (TempData["AgregarRecurso"] != null)
+{
+    <div class="row alert alert-danger" style="margin:0;padding:0; text-align:center">
+        @TempData["AgregarRecurso"]
+    </div>
+}
+
+<h1 class="display-4" style="text-align:center;">@ViewBag.Curso.nombre</h1>
+
+<a class="btn" style="margin:30px ;background-color:#ff2f00; color:white;" href="/Profesor/CreateModulo?idCurso=@ViewBag.IdCurso.idCurso">Crear nuevo modulo</a>
+<br />
+
+@if (ViewBag.Curso.modulos.Count > 0)
+{
+    <div class="container">
+        <table class="table">
+            <thead style="background-color:black; color:white;">
+                <tr>
+                    <th>Titulo del modulo</th>
+                    <th>Logro de la sesion</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewBag.Curso.modulos)
+                {
+                    <tr>
+                        <td>@item.titulo</td>
+                        <td>@item.descripcion</td>
+                        <td>
+                            <a class="btn" style="background-color:#ff2f00; color:white;" href="/Profesor/VerMaterialModulo?idModulo=@item.idModulo">Material de estudio</a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+
+}
+else
+{
+    <div class="row alert alert-danger" style="margin:0;padding:0; text-align:center">
+        El curso no cuenta con modulos registrados
+    </div>
+
+}
+
+
+
+
+<br />
+

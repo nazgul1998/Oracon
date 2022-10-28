@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewData["Title"] = "EnviarTarea";
+
+}
+
+<nav class="navbar fixed-top navbar-expand navbar-dark row" style="background-color: black; box-sizing: content-box; ">
+    <div class="collapse navbar-collapse">
+
+        <div class="col-lg-2" style="text-align:center">
+            <a href="/Usuario/IndexUsuario" class="nav-item active">
+                <img src="~/images/logo blanco.png" alt="Logo ORACON" width="80px" height="65px" />
+            </a>
+
+        </div>
+        <div class="col-lg-5" style="text-align:center">
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <a href="/Usuario/IndexUsuario" style="color:white">CURSOS</a>
+
+                </div>
+                <div class="col-lg-4" style="text-align:center">
+                    <a href="/Usuario/VerCursos" style="color:white">MI APRENDIZAJE</a>
+                </div>
+                <div class="col-lg-2" style="text-align:center">
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-lg-5">
+            <div class="row ">
+                <div class="col-lg-1">
+
+                </div>
+
+
+                <div class="col-lg-6" style="color: white; align-items: center; align-content: center; text-align: center">
+                    <label style="padding:0.2em; margin:0.2em;">Bienvenido, @ViewBag.UsuarioLogeado.nombres</label>
+                </div>
+
+                <div class="col-lg-5">
+                    <form method="post" action="/Usuario/Logout">
+                        <button class="btn" type="submit" style="color: white; background-color: #ff2f00;">CERRAR SESÍON</button>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+</nav>
+
+
+<h1 class="display-4" style="text-align:center;">Enviar Tarea</h1>
+
+<form action="/Usuario/EnviarTarea" method="post" enctype="multipart/form-data">
+    <input hidden name="idTarea" value="@ViewBag.IdTarea" />
+    <div class="row" style="align-items:center;">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+
+            <label class="form-text">Descricion: (opcional) </label>
+            <input class="form-control" name="observacion" type="text" />
+            <br />
+            <label class="form-text">Documento: (pdf) </label>
+            <input class="form-control" name="documento" type="file" accept="application/pdf" />
+            <br />
+            <br />
+            <div style="align-items:center; align-content:center; text-align:center;">
+                <button class="btn" style="background-color:#ff2f00; color:white; align-items:center; text-align:center;" type="submit">Enviar</button>
+                <a style="color:#ff2f00;" href="javascript: history.go(-1)">Cancelar</a>
+
+            </div>
+            <div class="col-lg-3"></div>
+        </div>
+    </div>
+
+</form>
+
+<br />

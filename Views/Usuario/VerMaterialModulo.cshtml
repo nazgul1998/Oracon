@@ -1,0 +1,325 @@
+﻿
+@{
+    ViewData["Title"] = "VerMaterialModulo";
+
+}
+
+<nav class="navbar fixed-top navbar-expand navbar-dark row" style="background-color: black; box-sizing: content-box; ">
+    <div class="collapse navbar-collapse">
+
+        <div class="col-lg-2" style="text-align:center">
+            <a href="/Usuario/IndexUsuario" class="nav-item active">
+                <img src="~/images/logo blanco.png" alt="Logo ORACON" width="80px" height="65px" />
+            </a>
+
+        </div>
+        <div class="col-lg-5" style="text-align:center">
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <a href="/Usuario/IndexUsuario" style="color:white">CURSOS</a>
+
+                </div>
+                <div class="col-lg-4" style="text-align:center">
+                    <a href="/Usuario/VerCursos" style="color:white">MI APRENDIZAJE</a>
+                </div>
+                <div class="col-lg-2" style="text-align:center">
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-lg-5">
+            <div class="row ">
+                <div class="col-lg-1">
+
+                </div>
+
+
+                <div class="col-lg-6" style="color: white; align-items: center; align-content: center; text-align: center">
+                    <label style="padding:0.2em; margin:0.2em;">Bienvenido, @ViewBag.UsuarioLogeado.nombres</label>
+                </div>
+
+                <div class="col-lg-5">
+                    <form method="post" action="/Usuario/Logout">
+                        <button class="btn" type="submit" style="color: white; background-color: #ff2f00;">CERRAR SESÍON</button>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+</nav>
+
+<h1 class="display-4" style="text-align:center;">@ViewBag.Modulo.titulo</h1>
+
+@if (ViewBag.Videos.Count == 0 && ViewBag.Documentos.Count == 0
+&& ViewBag.Enlaces.Count == 0 && ViewBag.Tareas.Count == 0)
+{
+
+
+    <div class="row alert alert-danger" style="margin:0;padding:0; text-align:center; align-items:center;">
+        Aun no se han registrado entradas en este modulo.
+    </div>
+}
+else
+{
+
+    @if (ViewBag.Videos.Count > 0)
+    {
+        <h2 class="display-5" style="text-align:center;">Multimedia</h2>
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8">
+                <table class="table">
+                    <thead style="background-color:black; color:white;">
+                        <tr>
+                            <th>Titulo del video</th>
+                            <th>Descripcion</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+
+                    <tbody>
+                        @foreach (var video in ViewBag.Videos)
+                        {
+                            <tr>
+                                <td>@video.titulo</td>
+                                <td>@video.descripcion</td>
+                                <td>
+                                    <!-- Button  modal -->
+                                    <a class="btn" target="_blank" href="@video.link" style="color: white; background-color: #ff2f00;">
+                                        Ver video
+                                    </a>
+                                   
+                 
+                                      
+                                </td>
+
+                            </tr>
+                        }
+
+
+
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+    }
+    else
+    {
+
+
+
+    }
+    <br />
+
+    @if (ViewBag.Documentos.Count > 0)
+    {
+        <h2 class="display-5" style="text-align:center;">Documentos</h2>
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8">
+                <table class="table">
+                    <thead style="background-color:black; color:white;">
+                        <tr>
+                            <th>Titulo del Documento</th>
+                            <th>Descripcion</th>
+                            <th></th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+                        @foreach (var documento in ViewBag.Documentos)
+                        {
+                            <tr>
+                                <td>@documento.titulo</td>
+                                <td>@documento.descripcion</td>
+                                <td>
+                                    <button class="btn" style="color:white; background-color:#ff2f00;">
+                                        @Html.ActionLink("Descargar", "PDFDisplay", "Profesor", new { idDocumento = documento.idDocumento }, new { target = "_blank" })
+                                    </button>
+                                </td>
+
+                            </tr>
+                        }
+
+
+
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+
+    }
+    else
+    {
+
+    }
+
+    <br />
+
+
+    @if (ViewBag.Enlaces.Count > 0)
+    {
+        <h2 class="display-5" style="text-align:center;">Enlaces</h2>
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8">
+                <table class="table">
+                    <thead style="background-color:black; color:white;">
+                        <tr>
+                            <th>Titulo del enlace</th>
+                            <th>Descripcion</th>
+                            <th></th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+                        @foreach (var enlace in ViewBag.Enlaces)
+                        {
+                            <tr>
+                                <td>@enlace.titulo</td>
+                                <td>@enlace.descripcion</td>
+                                <td>
+                                    <a class="btn" style="color:white; background-color:#ff2f00" target="_blank" href="@enlace.link">Ir a sitio externo</a>
+                                </td>
+
+                            </tr>
+                        }
+
+
+
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+    }
+    else
+    {
+
+
+    }
+
+    <br />
+
+    @if (ViewBag.Tareas.Count > 0)
+    {
+        <h2 class="display-5" style="text-align:center;">Tareas</h2>
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8">
+                <table class="table">
+                    <thead style="background-color:black; color:white;">
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Fecha limite</th>
+                            <th>Fecha de creacion</th>
+                            <th>Instrucciones</th>
+                            <th></th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+                        @foreach (var tarea in ViewBag.Tareas)
+                        {
+
+                            <tr>
+                                <td>@tarea.nombre</td>
+                                <td>@tarea.fechaMaxima</td>
+                                <td>@tarea.fechaCreacion</td>
+                                <td>@tarea.instrucciones</td>
+                                <td>
+                                    @if (tarea.entregas.Count == 0)
+                                    {
+
+
+                                        @if (tarea.fechaMaxima < DateTime.Now)
+                                        {
+
+
+                                            <h4 class="text-danger">Fecha expirada</h4>
+                                        }
+                                        else
+                                        {
+                                            <a class="btn" style="background-color:#ff2f00; color:white;" href="/Usuario/EnviarTarea?idTarea=@tarea.idTarea">Presentar tarea</a>
+                                        }
+
+
+                                    }
+                                    else
+                                    {
+                                        
+                                            var flaging = false;
+                                            foreach (var zz in ViewBag.TareasPresentadas)
+                                            {
+                                                if (zz.tarea.idTarea == tarea.idTarea && zz.idUsuario == ViewBag.UsuarioLogeado.idUsuario)
+                                                {
+                                                    flaging = true;
+                                                }
+                                            }
+
+                                            if (flaging)
+                                            {
+
+
+                                                <h4 class="text-success">Tarea presentada</h4>
+                                            }
+                                            else
+                                            {
+
+                                                <a class="btn" style="background-color:#ff2f00; color:white;" href="/Usuario/EnviarTarea?idTarea=@tarea.idTarea">Presentar tarea</a>
+
+
+                                            }
+                           
+                                    }
+                                </td>
+
+                            </tr>
+                        }
+
+
+
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+    }
+    else
+    {
+
+    }
+    <br />
+}
+
+
+
+<div style="align-items:center; align-content:center; text-align:center;">
+    <br />
+
+    <a class="btn" style="color:white; background-color:#ff2f00;" href="/Usuario/VerCursos">Regresar a cursos</a>
+    <br />
+</div>
+
+
+<br />

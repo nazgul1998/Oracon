@@ -1,0 +1,171 @@
+﻿
+@{
+    ViewData["Title"] = "VerProfesores";
+}
+
+
+
+
+<nav class="navbar fixed-top navbar-expand navbar-dark row" style="padding:10px; background-color: black; box-sizing: content-box;">
+    <div class="collapse navbar-collapse">
+
+        <div class="col-lg-2" style="text-align:center">
+            <a href="/Admin/Index" class="nav-item active">
+                <img src="~/images/logo blanco.png" alt="Logo ORACON" width="80px" height="65px" />
+            </a>
+
+        </div>
+        <div class="col-lg-6" style="text-align:center">
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <a href="/Admin/VerCursos" style="color:white">CURSOS</a>
+
+                </div>
+                <div class="col-lg-3" style="text-align:center">
+                    <a href="/Admin/VerPagos" style="color:white">PAGOS</a>
+                </div>
+                <div class="col-lg-3" style="text-align:center">
+                    <a href="/Admin/VerProfesores" style="color:white">PROFESORES</a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="row ">
+                <div class="col-lg-7" style="color: white; align-items: center; align-content: center; text-align: center">
+                    Administrador
+                </div>
+
+                <div class="col-lg-5">
+                    <form method="post" action="/Admin/Logout">
+                        <button class="btn" type="submit" style="color: white; background-color: #ff2f00;">CERRAR SESÍON</button>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+</nav>
+
+
+
+
+<h1 style="text-align:center;" class="display-4">Profesores registrados</h1>
+<br />
+@if (ViewBag.Profesores.Count == 0)
+{
+
+    <div class="row alert alert-warning" style="margin:0;padding:0; text-align:center; align-items:center;">
+        Aun no hay profesores registrados...
+    </div>
+    <br />
+    <a class="btn" style="background-color:#ff2f00; color:white;" href="/Admin/CreateDoctor">Agregar profesor</a>
+
+    <br />
+
+}
+else
+{
+<div class="container">
+    <a class="btn" style="background-color:#ff2f00; color:white;" href="/Admin/CreateDoctor">Agregar profesor</a>
+    <br /><br />
+    <div class="form-group">
+        <input type="text" class="form-control pull-right" style="width:20%" id="search" placeholder="Buscador...">
+    </div>
+
+
+    <table class="table" id="mytable">
+        <thead style="background-color:black; color:white;">
+            <tr>
+                <th>Foto</th>
+                <th>Nombres completos</th>
+                <th>Fecha de nacimiento</th>
+                <th>Correo</th>
+
+                <th>Celular</th>
+                <th>Dni</th>
+                <th>Titulo</th>
+                <th>Descripcion</th>
+                <th>Cursos</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var x in ViewBag.Profesores)
+            {
+                <tr>
+                    <td>
+                        @if (x.foto != null)
+                        {
+                            var base64 = Convert.ToBase64String(x.foto);
+                            var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                            <img src='@imgsrc'
+                                 style="border-radius:25px ;max-width:100px;max-height:100px" />
+                        }
+                        else
+                        {
+                            <img src="~/img/avatar-default.jpg"
+                                 style="max-width:100px;max-height:100px" />
+                        }
+                    </td>
+                    <td>@x.nombres @x.apellidos</td>
+                    <td>@x.fechaNac</td>
+                    <td>@x.correo</td>
+
+                    <td>@x.celular</td>
+                    <td>@x.dni</td>
+                    <td>@x.titulo</td>
+                    <td>@x.descripcion</td>
+                    <td>
+                        @if (x.cursos.Count > 0)
+                        {
+                            @foreach (var item in x.cursos)
+                            {
+                                @item.nombre
+                                <br /><br />
+                            }
+
+
+
+                        }
+                        else
+                        {
+                            <label>sin cursos asignados</label>
+                        }
+                    </td>
+
+                </tr>
+            }
+
+
+        </tbody>
+    </table>
+</div>
+    <br />
+    <br />
+    <div style="align-content:center; align-items:center; text-align:center;">
+        <a class="btn" style="color:white; background-color:#ff2f00;" href="/Admin/Index">Regresar al inicio</a>
+    </div>
+
+    <script>
+    $(document).ready(function () {
+        $("#search").keyup(function () {
+            _this = this;
+            // Show only matching TR, hide rest of them
+            $.each($("#mytable tbody tr"), function () {
+                if ($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1)
+                    $(this).hide();
+                else
+                    $(this).show();
+            });
+        });
+    });
+    </script>
+}
+
+

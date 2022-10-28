@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = null;
+}
+
+<h1>Cursos en general</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Descripcion</th>
+            <th>Profesor</th>
+            <th>Precio</th>
+            <th>Etiquetas</th>
+            <th>Video</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in ViewBag.Cursos) { 
+            <tr>
+                <td>@x.nombre</td>
+                <td>@x.descripcion</td>
+                <td>@x.profesor.nombres @x.profesor.apellidos</td>
+                <td>@x.precio</td>
+                <td>
+                    @foreach(var i in @x.etiquetas)
+                {
+                    @i.categoria.nombre  <label> </label>
+                }   
+                </td>
+                <td>
+
+                    <iframe width="500" height="300" src="@x.videoPresentacion" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+
+
+
+
+
+</table>

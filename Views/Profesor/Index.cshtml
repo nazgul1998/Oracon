@@ -1,0 +1,98 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+
+}
+
+
+
+<nav class="navbar  fixed-top navbar-expand navbar-dark row" style="background-color: black; box-sizing: content-box;">
+    <div class="collapse navbar-collapse">
+
+        <div class="col-lg-2" style="text-align:center">
+            <a href="/Profesor/Index" class="nav-item active">
+                <img src="~/images/logo blanco.png" alt="Logo ORACON" width="80px" height="65px" />
+            </a>
+
+        </div>
+        <div class="col-lg-5" style="text-align:center">
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <a href="/Profesor/Index" style="color:white">CURSOS</a>
+
+                </div>
+                <div class="col-lg-3" style="text-align:center">
+
+                </div>
+                <div class="col-lg-3" style="text-align:center">
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-lg-5">
+            <div class="row ">
+                <div class="col-lg-7" style="color: white; align-items: center; align-content: center; text-align: center">
+                    <label style="padding:0.2em; margin:0.2em;">Bienvenido, @ViewBag.ProfesorLogeado.nombres</label>
+                </div>
+
+                <div class="col-lg-5">
+                    <form method="post" action="/Profesor/Logout">
+                        <button class="btn" type="submit" style="color: white; background-color: #ff2f00;">CERRAR SESÍON</button>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+</nav>
+
+
+
+
+<br />
+<h1 class="display-4" style="text-align:center;">Cursos</h1>
+<br />
+<div class="container">
+    <table class="table">
+        <thead style="background-color:black; color:white;">
+            <tr>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Precio</th>
+
+                <th>Video</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var x in ViewBag.CursosProf)
+            {
+                <tr>
+                    <td>@x.nombre</td>
+                    <td>@x.descripcion</td>
+                    <td>@x.precio</td>
+                    <td>
+                       
+                       <a href="@x.videoPresentacion" class="btn" style="background-color:#ff2f00; color:white" target="_blank">Ver Video</a>
+
+                                    
+
+                    </td>
+                    <td>
+                        <a class="btn" style="background:#ff2f00; color:white" href="/Profesor/VerCurso?idCurso=@x.idCurso">Detalles</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+<br />

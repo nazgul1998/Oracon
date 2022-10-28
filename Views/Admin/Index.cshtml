@@ -1,0 +1,117 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<nav class="navbar fixed-top navbar-expand navbar-dark row" style="padding:10px; background-color: black; box-sizing: content-box;">
+    <div class="collapse navbar-collapse">
+
+        <div class="col-lg-2" style="text-align:center">
+            <a href="/Admin/Index" class="nav-item active">
+                <img src="~/images/logo blanco.png" alt="Logo ORACON" width="80px" height="65px" />
+            </a>
+
+        </div>
+        <div class="col-lg-6" style="text-align:center">
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <a href="/Admin/VerCursos" style="color:white">CURSOS</a>
+
+                </div>
+                <div class="col-lg-3" style="text-align:center">
+                    <a href="/Admin/VerPagos" style="color:white">PAGOS</a>
+                </div>
+                <div class="col-lg-3" style="text-align:center">
+                    <a href="/Admin/VerProfesores" style="color:white">PROFESORES</a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="row ">
+                <div class="col-lg-7" style="color: white; align-items: center; align-content: center; text-align: center">
+                    Administrador
+                </div>
+
+                <div class="col-lg-5">
+                    <form method="post" action="/Admin/Logout">
+                        <button class="btn" type="submit" style="color: white; background-color: #ff2f00;">CERRAR SESÍON</button>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+</nav>
+
+<h1 style="text-align:center;" class="display-4">Inicio</h1>
+<br />
+@if (ViewBag.Pagos.Count == 0)
+{
+    <div class="row alert alert-warning" style="margin:0;padding:0; text-align:center; align-items:center;">
+        Aun no hay matriculados
+    </div>
+}
+else
+{
+    <div class="container">
+        <div class="form-group">
+            <input type="text" class="form-control pull-right" style="width:20%" id="search" placeholder="Buscador...">
+        </div>
+
+        <table class="table" id="mytable">
+            <thead style="background-color:black; color: white;">
+                <tr>
+                    <th>Estudiante</th>
+                    <th>Curso</th>
+                    <th>Fecha de emision</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var x in ViewBag.Pagos)
+                {
+                    <tr>
+                        <td>@x.matricula.usuario.nombres @x.matricula.usuario.apellidos</td>
+                        <td>@x.matricula.curso.nombre</td>
+                        <td>@x.fechaPago</td>
+                        <td>@x.monto</td>
+                        <td>
+                            @if (x.estado == "SIN PAGO")
+                            {
+                                <form action="/Admin/CancelarPago" method="post">
+                                    <input hidden value="@x.idPago" name="idPago" />
+                                    <button class="btn" style="background-color:#ff2f00; color:white;" type="submit">Pagar</button>
+                                </form>
+
+                            }
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $("#search").keyup(function () {
+                _this = this;
+                // Show only matching TR, hide rest of them
+                $.each($("#mytable tbody tr"), function () {
+                    if ($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1)
+                        $(this).hide();
+                    else
+                        $(this).show();
+                });
+            });
+        });
+    </script>
+}

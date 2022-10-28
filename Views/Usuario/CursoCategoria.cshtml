@@ -1,0 +1,238 @@
+﻿
+@{
+    ViewData["Title"] = "CursoCategoria";
+}
+
+<nav class="navbar navbar-expand navbar-dark row" style="background-color: black; box-sizing: content-box; ">
+    <div class="collapse navbar-collapse">
+
+        <div class="col-lg-2" style="text-align:center">
+            <a href="/Home/Index" class="nav-item active">
+                <img src="~/images/logo blanco.png" alt="Logo ORACON" width="80px" height="65px" />
+            </a>
+
+        </div>
+        <div class="col-lg-6" style="text-align:center">
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <a href="/Usuario/IndexUsuario" style="color:white">CURSOS</a>
+
+                </div>
+                <div class="col-lg-3" style="text-align:center">
+                    <a href="/Usuario/VerCursos" style="color:white">MI APRENDIZAJE</a>
+                </div>
+                <div class="col-lg-3" style="text-align:center">
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="row ">
+                <div class="col-lg-1">
+
+                </div>
+
+
+                <div class="col-lg-7" style="color: white; align-items: center; align-content: center; text-align: center">
+                    <label style="padding:0.2em; margin:0.2em;">Bienvenido, @ViewBag.UsuarioLogeado.nombres</label>
+                </div>
+
+                <div class="col-lg-4">
+                    <form method="post" action="/Usuario/Logout">
+                        <button class="btn" type="submit" style="color: white; background-color: #ff2f00;">CERRAR SESÍON</button>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+</nav>
+
+<h1 class="display-3" href="/Usuario/VerCursos" style="text-align:center;">CURSOS DE @ViewBag.CategoriaSeleccionada.nombre.ToUpper()</h1>
+@if (TempData["AgregarCurso"] != null)
+{
+    <div class="row alert alert-danger" style="margin:0;padding:0; text-align:center; align-items:center;">
+        @TempData["AgregarCurso"]
+
+    </div>}
+@if (ViewBag.CursosDisponibles.Count == 0)
+{
+
+    <div class="row alert alert-danger" style="margin:0;padding:0; text-align:center">
+        Aun no se ha registrado ningun curso.
+
+    </div>
+}
+else
+{
+    @if (ViewBag.CategoriasDisponibles.Count == 0)
+    {
+        <div class="row">
+            <table id="dtBasicExample" class="table table-striped" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Descripcion</th>
+                        <th>Profesor</th>
+                        <th>Precio</th>
+
+                        <th>Video</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var x in ViewBag.CursosDisponibles)
+                    {
+                        <tr>
+                            <td>@x.nombre</td>
+                            <td>@x.descripcion</td>
+                            <td>@x.profesor.nombres @x.profesor.apellidos</td>
+                            <td>@x.precio</td>
+
+                            <td>
+
+                                <iframe width="500" height="300" src="@x.videoPresentacion" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </td>
+                            <td>
+                                <form action="AgregarCurso" method="post">
+                                    <input name="idCurso" value="@x.idCurso" hidden />
+
+                                    <button class="btn" style="color:white; background-color:#ff2f00;" type="submit">Agregar</button>
+
+                                    <input name="idUsuario" value="@ViewBag.UsuarioLogeado.idUsuario" hidden />
+
+                                </form>
+                            </td>
+                        </tr>
+                    }
+
+
+
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+
+        <div class="row">
+            <div class="col-lg-2">
+                <nav class="navbar navbar-static-top" style="color:black">
+                    <table>
+                        <tbody>
+                            @foreach (var item in ViewBag.CategoriasDisponibles)
+                            {
+                                <tr>
+                                    <td>
+                                        <a href="/Usuario/CursoCategoria?idCategoria=@item.idCategoria" class="btn" style="color: white; background-color: #ff2f00;">@item.nombre</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+
+                    <br />
+
+                </nav>
+            </div>
+
+            <div class="col-lg-10">
+                <table id="dtBasicExample" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Descripcion</th>
+                            <th>Profesor</th>
+                            <th>Precio</th>
+                            <th>Video</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var x in ViewBag.CursosDisponibles)
+                        {
+                            <tr>
+                                <td>@x.curso.nombre</td>
+                                <td>@x.curso.descripcion</td>
+                                <td>@x.curso.profesor.nombres @x.curso.profesor.apellidos</td>
+                                <td>S/. @x.curso.precio</td>
+
+                                <td>
+                                    <!-- Button  modal -->
+                                    <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal" style="color: white; background-color: #ff2f00;">
+                                        Ver video
+                                    </button>
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Presentación del curso</h5>
+                                                    <br />
+
+                                                </div>
+                                                <div class="modal-body ">
+                                                    <iframe width="450px" height="300px" src="@x.curso.videoPresentacion" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                    <br />
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <div style="align-items:center; align-content:center; text-align:center;">
+                                                        <br />
+                                                        <button class="btn" data-dismiss="modal" aria-label="Close" style="color:white; background-color:#ff2f00;">Regresar</button>
+                                                        <br />
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <form action="AgregarCurso" method="post">
+                                        <input name="idCurso" value="@x.curso.idCurso" hidden />
+
+                                        <button class="btn" style="color:white; background-color:#ff2f00;" type="submit">Agregar</button>
+
+                                        <input name="idUsuario" value="@ViewBag.UsuarioLogeado.idUsuario" hidden />
+
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+}
+<div style="align-items:center; align-content:center; text-align:center;">
+    <br />
+
+    <a class="btn" style="color:white; background-color:#ff2f00;" href="javascript: history.go(-1)">Regresar</a>
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    <a class="btn" style="color:white; background-color:#ff2f00;" href="/Usuario/IndexUsuario">Quitar filtro</a>
+
+    <br />
+</div>
+
+
+<br />
+
+<script>
+    $(document).ready(function () {
+        $('#dtBasicExample').DataTable();
+        $('.dataTables_length').addClass('bs-select');
+    });
+</script>
