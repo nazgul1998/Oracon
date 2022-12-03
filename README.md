@@ -15,7 +15,7 @@
 
 ## Luego el usuario se registra e inicia sesión, tras esto el usuario vera que se agregara la opción de agregar en cada fila de la tabla de cursos, tras seleccionar un curso procedemos a registrarnos, esto nos permitirá estar inscrito en el curso mas no ver el contenido. Este pago se realiza en las oficinas de la empresa. 
 
-![]([https://github.com/nazgul1998/Oracon/blob/master/MD/invitado-home.gif](https://github.com/nazgul1998/Oracon/blob/master/MD/usuario-registro_login_y_inscripcion_en_curso.gif))
+![](https://github.com/nazgul1998/Oracon/blob/master/MD/usuario-registro_login_y_inscripcion_en_curso.gif)
 
 
 ## Tras a ver realizado el pago del curso, el administrador cambiara el estado de su matrícula a "pagado", aquí podrá tener acceso al contenido  del curso, que se mostrara de la siguiente manera. 
