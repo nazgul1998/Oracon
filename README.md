@@ -10,7 +10,7 @@
 
 ## Al ingresar a la web veremos todos los cursos registrados como invitado, es decir no podemos adquirir ningún curso, hasta crearnos una cuenta.
 
-![Image text](./md/invitado-home.gif)
+![](md/invitado-home.gif)
 
 
 ## Luego el usuario se registra e inicia sesión, tras esto el usuario vera que se agregara la opción de agregar en cada fila de la tabla de cursos, tras seleccionar un curso procedemos a registrarnos, esto nos permitirá estar inscrito en el curso mas no ver el contenido. Este pago se realiza en las oficinas de la empresa. 
